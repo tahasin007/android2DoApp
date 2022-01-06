@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">my2Do</string>
+    <string name="hint_resource">Task Category</string>
+    <string-array name="categories">
+        <item>Task Category...</item>
+        <item>Business</item>
+        <item>Shopping</item>
+        <item>Study</item>
+        <item>Diet</item>
+        <item>Workout</item>
+    </string-array>
+
+    <string name="popup_item_edit">Edit</string>
+    <string name="popup_item_view">View</string>
+    <string name="popup_item_delete">Delete</string>
+</resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    android:backgroundTint="@color/primary_blue"
+    android:elevation="15dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="16dp"
+        android:weightSum="12">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/task_card_status_container">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="5dp"
+                    android:visibility="gone"
+                    android:layout_marginRight="15dp"
+                    android:backgroundTint="@color/teal_700"
+                    android:id="@+id/card_view_category_container"
+                    app:cardCornerRadius="2dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/text_view_task_category"
+                        android:textStyle="bold|italic"
+                        android:textColor="@color/white"
+                        android:padding="3dp"
+                        android:textSize="10dp"
+                        android:text="Category"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="5dp"
+                    android:visibility="gone"
+                    android:id="@+id/image_view_done_all"
+                    android:src="@drawable/ic_baseline_done_all_green_24"
+                    android:layout_toRightOf="@+id/card_view_category_container"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_view_task_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task Title"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+
+            <TextView
+                android:id="@+id/text_view_task_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Description"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3">
+
+            <TextView
+                android:id="@+id/text_view_task_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Tomorrow"
+                android:textColor="@color/red"
+                android:textSize="11dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/pop_up_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary_blue"
+                android:src="@drawable/ic_baseline_more_vert_24" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
