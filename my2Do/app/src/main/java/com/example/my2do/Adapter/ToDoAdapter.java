@@ -54,16 +54,15 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         final ToDoModel item = mList.get(position);
         holder.taskTitle.setText(item.getTaskTitle());
         holder.taskDescription.setText(item.getTaskDescription());
-        if(item.getTaskCategory() != null){
+        if (item.getTaskCategory() != null) {
             holder.cardViewTaskCategoryContainer.setVisibility(View.VISIBLE);
         }
 
-        if(item.getTaskStatus() == 1){
+        if (item.getTaskStatus() == 1) {
             holder.taskStatus.setVisibility(View.VISIBLE);
             holder.taskTitle.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             holder.taskTitle.setTypeface(null, Typeface.ITALIC);
-        }
-        else if(item.getTaskStatus() == 0){
+        } else if (item.getTaskStatus() == 0) {
             holder.taskStatus.setVisibility(View.GONE);
             holder.taskTitle.setPaintFlags(0);
             holder.taskTitle.setTypeface(null, Typeface.NORMAL);
@@ -71,6 +70,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         holder.taskCategory.setText(item.getTaskCategory());
         holder.taskDate.setText(item.getTaskDate());
     }
+
 
     @Override
     public int getItemCount() {
@@ -81,9 +81,22 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         return activity;
     }
 
-    public void setTasks(List<ToDoModel>mList){
+    public void setTasks(List<ToDoModel> mList) {
         this.mList = mList;
         notifyDataSetChanged();
+    }
+
+    public void updateTaskStatus(int position) {
+        ToDoModel item = mList.get(position);
+        if (item.getTaskStatus() == 1) {
+            Toast.makeText(activity, "Already Marked as Done", Toast.LENGTH_SHORT).show();
+        } else {
+            myDB.updateTaskStatus(item.getTaskId());
+            notifyDataSetChanged();
+            Intent intent = activity.getIntent();
+//            activity.finish();
+            activity.startActivity(intent);
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
@@ -109,7 +122,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
                 }
             });
         }
-        private void showPopupMenu(View v){
+
+        private void showPopupMenu(View v) {
             PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
             popupMenu.inflate(R.menu.popup_menu);
             popupMenu.setOnMenuItemClickListener(this);
@@ -123,7 +137,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
             pos = getAdapterPosition();
             singleTask = mList.get(pos);
 
-            switch (menuitem.getItemId()){
+            switch (menuitem.getItemId()) {
                 case R.id.action_popup_view:
                     Intent i = new Intent(activity, FullScreenTaskActivity.class);
                     i.putExtra("position", pos);
@@ -149,7 +163,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
                     AddNewTask task = new AddNewTask();
                     task.setArguments(bundle);
-                    task.show(activity.getSupportFragmentManager(), task.getTag() );
+                    task.show(activity.getSupportFragmentManager(), task.getTag());
                     notifyDataSetChanged();
                     return true;
 

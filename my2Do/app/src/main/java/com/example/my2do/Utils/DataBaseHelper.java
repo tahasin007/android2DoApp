@@ -20,7 +20,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase db;
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
     private static  final String DATABASE_NAME = "TODO_DATABASE";
     private static  final String TABLE_TODO = "TODO_TABLE";
     private static  final String COL_ID = "ID";
@@ -55,7 +55,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void insertTask(ToDoModel model){
         db = this.getWritableDatabase();
-//        String taskDateStr = db.execSQL("SELECT datetime"+"(" + "now"+ ")");
 
         ContentValues values = new ContentValues();
         values.put(COL_TASK_TITLE , model.getTaskTitle());
@@ -87,6 +86,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_TODO , values , "ID=?" , new String[]{String.valueOf(id)});
     }
 
+    public void updateTaskStatus(int id){
+        db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_TASK_STATUS , 1);
+        db.update(TABLE_TODO , values , "ID=?" , new String[]{String.valueOf(id)});
+    }
+
     public List<ToDoModel> getAllTasks(){
 
         db = this.getWritableDatabase();
@@ -99,14 +105,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             if (cursor !=null){
                 if (cursor.moveToFirst()){
                     do {
-//                        String taskDateStr = cursor.getString(cursor.getColumnIndexOrThrow(COL_TASK_DATE));
-//                        Date taskDate = null;
-//                        try {
-//                            taskDate = new SimpleDateFormat("dd/MM/yyyy").parse(taskDateStr);
-//                        } catch (ParseException e) {
-//                            e.printStackTrace();
-//                        }
-
                         ToDoModel task = new ToDoModel();
                         task.setTaskId(cursor.getInt(cursor.getColumnIndexOrThrow(COL_ID)));
                         task.setTaskStatus(cursor.getInt(cursor.getColumnIndexOrThrow(COL_TASK_STATUS)));
@@ -114,7 +112,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         task.setTaskDescription(cursor.getString(cursor.getColumnIndexOrThrow(COL_TASK_DESCRIPTION)));
                         task.setTaskCategory(cursor.getString(cursor.getColumnIndexOrThrow(COL_TASK_CATEGORY)));
                         task.setTaskDate(cursor.getString(cursor.getColumnIndexOrThrow(COL_TASK_DATE)));
-//                        Log.i("Format", cursor.getString(cursor.getColumnIndexOrThrow(COL_TASK_DATE)));
                         modelList.add(task);
 
                     }while (cursor.moveToNext());

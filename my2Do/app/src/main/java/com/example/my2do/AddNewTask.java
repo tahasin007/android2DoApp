@@ -114,6 +114,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
 
             if(taskStatus == 1){
                 checkBoxStatus.setChecked(true);
+                checkBoxStatus.setText("Done");
             }
 
             String taskTitle = bundle.getString("taskTitle");

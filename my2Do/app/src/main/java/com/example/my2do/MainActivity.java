@@ -1,6 +1,7 @@
 package com.example.my2do;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.my2do.Adapter.ToDoAdapter;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnDialogCloseListener {
     private RecyclerView recyclerView;
+    private TextView textView;
     private FloatingActionButton fab;
     private DataBaseHelper myDB;
 
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogCloseList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
+        textView = findViewById(R.id.text_view_all_tasks);
         fab = findViewById(R.id.fab);
         myDB = new DataBaseHelper(MainActivity.this);
 
@@ -41,11 +45,13 @@ public class MainActivity extends AppCompatActivity implements OnDialogCloseList
         adapter = new ToDoAdapter(MainActivity.this, myDB);
 
         mList = myDB.getAllTasks();
+
         Collections.reverse(mList);
         adapter.setTasks(mList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements OnDialogCloseList
                 AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
             }
         });
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerViewTouchHelper(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -73,9 +82,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogCloseList
             mList.remove(pos);
             adapter.notifyItemRemoved(pos);
             Toast.makeText(this, "\'" + singleTask.getTaskTitle() + "\' Deleted", Toast.LENGTH_SHORT).show();
-        }
-
-        else if (requestCode == 0 && resultCode == 5 && data != null) {
+        } else if (requestCode == 0 && resultCode == 5 && data != null) {
             String position = data.getStringExtra("position");
             int pos = Integer.parseInt(position);
             singleTask = mList.get(pos);

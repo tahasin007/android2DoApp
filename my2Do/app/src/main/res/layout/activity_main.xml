@@ -13,8 +13,9 @@
         android:text="All Tasks"
         android:textSize="30dp"
         android:textStyle="bold"
+        android:visibility="visible"
         android:textColor="@color/light_blue"
-        android:id="@+id/text_view_upcoming_tasks"
+        android:id="@+id/text_view_all_tasks"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_below="@+id/text_view_upcoming_tasks"
+        android:layout_below="@+id/text_view_all_tasks"
         android:id="@+id/recycler_view"
         android:nestedScrollingEnabled="true"
         android:layout_height="wrap_content"/>

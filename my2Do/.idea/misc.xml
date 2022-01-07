@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/android practice/my2Do/app/src/main/res/layout/activity_full_screen_task.xml" value="0.20416666666666666" />
+        <entry key="..\:/android practice/my2Do/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/android practice/my2Do/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/android/my2Do/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2203125" />
         <entry key="..\:/android/my2Do/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.2203125" />
         <entry key="..\:/android/my2Do/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2203125" />
